@@ -1,24 +1,66 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Alerts from './components/Alerts.js';
+import About from './components/About.js';
+import NavBar from "./components/NavBar.js"
+import TextForm from './components/TextForm.js';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+
+
 
 function App() {
+  const [alert, setAlert] = useState(null);
+  const [mode, setMode] = useState('light');//whether dark mode is enabled or not
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() => {
+      setAlert(null)
+
+    }, 2000)
+
+  }
+  const toggleMode = () => {
+    if (mode === 'light') {
+      setMode('dark');
+      document.body.style.backgroundColor = '#09112b'
+      showAlert("Dark Mode has been enabled", "success")
+      document.title = "TextUtils - Home(Dark Mode)"
+
+    }
+    else {
+      setMode('light');
+      document.body.style.backgroundColor = 'white'
+      showAlert("Light Mode has been enabled", "success")
+      document.title = "TextUtils - Home(Light Mode)"
+
+
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <>
+        <NavBar Title="Text With Us" aboutText="About" mode={mode} toggleMode={toggleMode} />
+        <Alerts alert={alert}></Alerts>
+        <div className="container my-3">
+          <Routes>
+            
+            <Route exact path="/about" element ={<About />}/>
+              
+            <Route exact path="/" element = {<TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />}/>
+              
+          </Routes>
+        </div>
+      </>
+    </Router>
   );
 }
 
