@@ -1,15 +1,15 @@
 
 import './App.css';
 import Alerts from './components/Alerts.js';
-import About from './components/About.js';
+// import About from './components/About.js';
 import NavBar from "./components/NavBar.js"
 import TextForm from './components/TextForm.js';
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+// } from "react-router-dom";
 
 
 
@@ -46,21 +46,22 @@ function App() {
     }
   }
   return (
-    <Router>
-      <>
-        <NavBar Title="Text With Us" aboutText="About" mode={mode} toggleMode={toggleMode} />
-        <Alerts alert={alert}></Alerts>
-        <div className="container my-3">
-          <Routes>
-            
-            <Route exact path="/about" element ={<About />}/>
-              
-            <Route exact path="/" element = {<TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />}/>
-              
-          </Routes>
-        </div>
-      </>
-    </Router>
+    // <Router>
+    <>
+      <NavBar Title="Text With Us" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} />
+      <Alerts alert={alert}></Alerts>
+      <div className="container my-3">
+        {/* <Routes> */}
+
+        {/* <Route path="/about" element ={<About/>}/> */}
+
+        {/* <Route path="/" element = {<TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />}/> */}
+        <TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />
+
+        {/* </Routes> */}
+      </div>
+    </>
+    // </Router>
   );
 }
 
